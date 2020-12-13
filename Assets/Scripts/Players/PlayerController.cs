@@ -41,6 +41,7 @@ namespace ARPG.Players
 			{
 				if (NavMesh.SamplePosition(hitInfo.point, out var hit, 1.0f, NavMesh.AllAreas))
 				{
+					transform.LookAt(hit.position);
 					_navMeshAgent.SetDestination(hit.position);
 				}
 			}

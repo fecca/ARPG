@@ -6,7 +6,9 @@ namespace ARPG.Inputs
 	{
 		public override void InstallBindings()
 		{
-			Container.DeclareSignal<MouseButtonClickedSignal>();
+			Container.DeclareSignal<MouseButtonDownSignal>();
+			Container.DeclareSignal<MouseButtonHoldSignal>();
+			Container.DeclareSignal<MouseButtonUpSignal>();
 		}
 	}
 }

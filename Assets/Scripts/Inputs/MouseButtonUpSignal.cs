@@ -2,11 +2,11 @@
 
 namespace ARPG.Inputs
 {
-	public class MouseButtonClickedSignal
+	public class MouseButtonUpSignal
 	{
 		public Vector3 MousePosition;
 
-		public MouseButtonClickedSignal(Vector3 mousePosition)
+		public MouseButtonUpSignal(Vector3 mousePosition)
 		{
 			MousePosition = mousePosition;
 		}

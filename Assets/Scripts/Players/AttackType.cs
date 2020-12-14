@@ -1,9 +1,9 @@
 ﻿namespace ARPG.Players
 {
-    public enum AttackType
-    {
-        Single,
-        Spread,
-        Area
-    }
+	public enum AttackType
+	{
+		Single,
+		Spread,
+		Area
+	}
 }

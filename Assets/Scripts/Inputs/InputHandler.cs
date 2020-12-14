@@ -4,88 +4,88 @@ using Zenject;
 
 namespace ARPG.Inputs
 {
-    public class InputHandler : MonoBehaviour
-    {
-        [SerializeField] private float _lmbHoldSignalInterval = 0.1f;
-        [SerializeField] private float _rmbHoldSignalInterval = 0.1f;
+	public class InputHandler : MonoBehaviour
+	{
+		[SerializeField] private float _lmbHoldSignalInterval = 0.1f;
+		[SerializeField] private float _rmbHoldSignalInterval = 0.1f;
 
-        private ISignalBusAdapter _signalBusAdapter;
-        private float _lmbHoldSignalTimer;
-        private float _rmbHoldSignalTimer;
+		private ISignalBusAdapter _signalBusAdapter;
+		private float _lmbHoldSignalTimer;
+		private float _rmbHoldSignalTimer;
 
-        [Inject]
-        public void Construct(ISignalBusAdapter signalBusAdapter)
-        {
-            _signalBusAdapter = signalBusAdapter;
-        }
+		[Inject]
+		public void Construct(ISignalBusAdapter signalBusAdapter)
+		{
+			_signalBusAdapter = signalBusAdapter;
+		}
 
-        private void Update()
-        {
-            CheckMouseButtonDown(0);
-            CheckMouseButtonHold(0);
-            CheckMouseButtonUp(0);
+		private void Update()
+		{
+			CheckMouseButtonDown(0);
+			CheckMouseButtonHold(0);
+			CheckMouseButtonUp(0);
 
-            CheckMouseButtonDown(1);
-            CheckMouseButtonHold(1);
-            CheckMouseButtonUp(1);
+			CheckMouseButtonDown(1);
+			CheckMouseButtonHold(1);
+			CheckMouseButtonUp(1);
 
-            if (Input.GetKeyUp(KeyCode.Alpha0))
-            {
-                _signalBusAdapter.Fire(new KeyUpSignal(KeyCode.Alpha0));
-            }
+			if (Input.GetKeyUp(KeyCode.Alpha0))
+			{
+				_signalBusAdapter.Fire(new KeyUpSignal(KeyCode.Alpha0));
+			}
 
-            if (Input.GetKeyUp(KeyCode.Alpha1))
-            {
-                _signalBusAdapter.Fire(new KeyUpSignal(KeyCode.Alpha1));
-            }
+			if (Input.GetKeyUp(KeyCode.Alpha1))
+			{
+				_signalBusAdapter.Fire(new KeyUpSignal(KeyCode.Alpha1));
+			}
 
-            if (Input.GetKeyUp(KeyCode.Alpha2))
-            {
-                _signalBusAdapter.Fire(new KeyUpSignal(KeyCode.Alpha2));
-            }
-        }
+			if (Input.GetKeyUp(KeyCode.Alpha2))
+			{
+				_signalBusAdapter.Fire(new KeyUpSignal(KeyCode.Alpha2));
+			}
+		}
 
-        private void CheckMouseButtonDown(int button)
-        {
-            if (!Input.GetMouseButtonDown(button)) return;
+		private void CheckMouseButtonDown(int button)
+		{
+			if (!Input.GetMouseButtonDown(button)) return;
 
-            _signalBusAdapter.Fire(new MouseButtonDownSignal(Input.mousePosition, button));
-        }
+			_signalBusAdapter.Fire(new MouseButtonDownSignal(Input.mousePosition, button));
+		}
 
-        private void CheckMouseButtonHold(int button)
-        {
-            if (!Input.GetMouseButton(button)) return;
+		private void CheckMouseButtonHold(int button)
+		{
+			if (!Input.GetMouseButton(button)) return;
 
-            switch (button)
-            {
-                case 0:
-                    if (_lmbHoldSignalTimer >= _lmbHoldSignalInterval)
-                    {
-                        _signalBusAdapter.Fire(new MouseButtonHoldSignal(Input.mousePosition, button));
-                        _lmbHoldSignalTimer = 0f;
-                    }
+			switch (button)
+			{
+				case 0:
+					if (_lmbHoldSignalTimer >= _lmbHoldSignalInterval)
+					{
+						_signalBusAdapter.Fire(new MouseButtonHoldSignal(Input.mousePosition, button));
+						_lmbHoldSignalTimer = 0f;
+					}
 
-                    _lmbHoldSignalTimer += Time.deltaTime;
+					_lmbHoldSignalTimer += Time.deltaTime;
 
-                    break;
-                case 1:
-                    if (_rmbHoldSignalTimer >= _rmbHoldSignalInterval)
-                    {
-                        _signalBusAdapter.Fire(new MouseButtonHoldSignal(Input.mousePosition, button));
-                        _rmbHoldSignalTimer = 0f;
-                    }
+					break;
+				case 1:
+					if (_rmbHoldSignalTimer >= _rmbHoldSignalInterval)
+					{
+						_signalBusAdapter.Fire(new MouseButtonHoldSignal(Input.mousePosition, button));
+						_rmbHoldSignalTimer = 0f;
+					}
 
-                    _rmbHoldSignalTimer += Time.deltaTime;
+					_rmbHoldSignalTimer += Time.deltaTime;
 
-                    break;
-            }
-        }
+					break;
+			}
+		}
 
-        private void CheckMouseButtonUp(int button)
-        {
-            if (!Input.GetMouseButtonUp(button)) return;
+		private void CheckMouseButtonUp(int button)
+		{
+			if (!Input.GetMouseButtonUp(button)) return;
 
-            _signalBusAdapter.Fire(new MouseButtonUpSignal(Input.mousePosition, button));
-        }
-    }
+			_signalBusAdapter.Fire(new MouseButtonUpSignal(Input.mousePosition, button));
+		}
+	}
 }

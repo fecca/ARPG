@@ -1,13 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
-using ARPG.Inputs;
+using ARPG.Moving;
 using ARPG.Zenject;
 using CreatorKitCodeInternal;
 using UnityEngine;
 using Zenject;
-using Object = UnityEngine.Object;
 
-namespace ARPG.Players
+namespace ARPG.Attacking
 {
 	public class AttackController : MonoBehaviour, AnimationControllerDispatcher.IAttackFrameReceiver
 	{
@@ -82,7 +81,7 @@ namespace ARPG.Players
 				var target = new Vector3(_hitInfo.point.x, position.y, _hitInfo.point.z);
 				var direction = Quaternion.AngleAxis(angle, Vector3.up) * (target - position);
 
-				_projectileFactory.Create(position, direction.normalized, 2.0f);
+				_projectileFactory.Create(position, direction.normalized, _currentAttackSkill.range);
 			}
 		}
 
@@ -90,13 +89,13 @@ namespace ARPG.Players
 		{
 			switch (signal.KeyCode)
 			{
-				case KeyCode.Alpha0:
+				case KeyCode.Alpha1:
 					_currentAttackSkill = _attackSkills[0];
 					break;
-				case KeyCode.Alpha1:
+				case KeyCode.Alpha2:
 					_currentAttackSkill = _attackSkills[1];
 					break;
-				case KeyCode.Alpha2:
+				case KeyCode.Alpha3:
 					_currentAttackSkill = _attackSkills[2];
 					break;
 				default:

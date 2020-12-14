@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using UnityEngine.AI;
 
-namespace ARPG.Players
+namespace ARPG.Moving
 {
     public class NavmeshSampler
     {

@@ -1,4 +1,5 @@
-﻿using ARPG.Zenject;
+﻿using ARPG.Attacking;
+using ARPG.Zenject;
 using UnityEngine;
 using Zenject;
 
@@ -29,11 +30,6 @@ namespace ARPG.Inputs
 			CheckMouseButtonHold(1);
 			CheckMouseButtonUp(1);
 
-			if (Input.GetKeyUp(KeyCode.Alpha0))
-			{
-				_signalBusAdapter.Fire(new KeyUpSignal(KeyCode.Alpha0));
-			}
-
 			if (Input.GetKeyUp(KeyCode.Alpha1))
 			{
 				_signalBusAdapter.Fire(new KeyUpSignal(KeyCode.Alpha1));
@@ -42,6 +38,11 @@ namespace ARPG.Inputs
 			if (Input.GetKeyUp(KeyCode.Alpha2))
 			{
 				_signalBusAdapter.Fire(new KeyUpSignal(KeyCode.Alpha2));
+			}
+
+			if (Input.GetKeyUp(KeyCode.Alpha3))
+			{
+				_signalBusAdapter.Fire(new KeyUpSignal(KeyCode.Alpha3));
 			}
 		}
 

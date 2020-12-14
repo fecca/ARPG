@@ -1,4 +1,4 @@
-﻿namespace ARPG.Players
+﻿namespace ARPG.Attacking
 {
 	public enum AttackType
 	{

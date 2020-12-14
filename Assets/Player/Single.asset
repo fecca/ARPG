@@ -13,7 +13,4 @@ MonoBehaviour:
   m_Name: Single
   m_EditorClassIdentifier: 
   attackType: 0
-  projectile: {fileID: 1343596251892245329, guid: e23f159b7692b084daac6d40ed20dfe5,
-    type: 3}
-  numberOfProjectiles: 0
-  projectileForce: 1000
+  range: 30

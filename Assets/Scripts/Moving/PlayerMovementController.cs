@@ -1,10 +1,10 @@
-﻿using System;
+﻿using ARPG.Players;
 using CreatorKitCodeInternal;
 using UnityEngine;
 using UnityEngine.AI;
 using Zenject;
 
-namespace ARPG.Players
+namespace ARPG.Moving
 {
     public class PlayerMovementController : MonoBehaviour, AnimationControllerDispatcher.IFootstepFrameReceiver
     {

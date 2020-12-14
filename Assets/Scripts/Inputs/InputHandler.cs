@@ -28,6 +28,21 @@ namespace ARPG.Inputs
             CheckMouseButtonDown(1);
             CheckMouseButtonHold(1);
             CheckMouseButtonUp(1);
+
+            if (Input.GetKeyUp(KeyCode.Alpha0))
+            {
+                _signalBusAdapter.Fire(new KeyUpSignal(KeyCode.Alpha0));
+            }
+
+            if (Input.GetKeyUp(KeyCode.Alpha1))
+            {
+                _signalBusAdapter.Fire(new KeyUpSignal(KeyCode.Alpha1));
+            }
+
+            if (Input.GetKeyUp(KeyCode.Alpha2))
+            {
+                _signalBusAdapter.Fire(new KeyUpSignal(KeyCode.Alpha2));
+            }
         }
 
         private void CheckMouseButtonDown(int button)

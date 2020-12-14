@@ -2,7 +2,7 @@
 
 namespace ARPG.Inputs
 {
-	public class MouseButtonDownSignal
+    public class MouseButtonDownSignal
 	{
 		public Vector3 MousePosition;
         public int Button;

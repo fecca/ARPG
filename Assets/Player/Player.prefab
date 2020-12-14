@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 3741610862044028805}
   - component: {fileID: 2518295650198636805}
   - component: {fileID: 2299958628635428254}
-  m_Layer: 0
+  m_Layer: 13
   m_Name: Player
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -81,7 +81,7 @@ GameObject:
   m_Component:
   - component: {fileID: 366040115755789115}
   - component: {fileID: 2881985336127672152}
-  m_Layer: 0
+  m_Layer: 13
   m_Name: MovementController
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -126,7 +126,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3221173598759865875}
   - component: {fileID: 8690801422160233106}
-  m_Layer: 0
+  m_Layer: 13
   m_Name: AttackController
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -162,9 +162,10 @@ MonoBehaviour:
   _rootTransform: {fileID: 3741610862044028805}
   _attackPosition: {fileID: 2844492297866099588}
   _animator: {fileID: 3716334512757776422}
-  _projectile: {fileID: 1343596251892245329, guid: e23f159b7692b084daac6d40ed20dfe5,
-    type: 3}
-  _projectileForce: 2000
+  _attackSkills:
+  - {fileID: 11400000, guid: 2c63294314a5a24428a6214c2df06b38, type: 2}
+  - {fileID: 11400000, guid: d81f16859e6b0f943abc21240e1df61f, type: 2}
+  - {fileID: 11400000, guid: a25616a7e02d657449e9d6c680d597a8, type: 2}
 --- !u!114 &6070127212658201093
 MonoBehaviour:
   m_ObjectHideFlags: 0

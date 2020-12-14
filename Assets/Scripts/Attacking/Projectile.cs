@@ -1,4 +1,4 @@
-﻿using System;
+﻿using ARPG.Characters;
 using UnityEngine;
 using Zenject;
 
@@ -31,6 +31,17 @@ namespace ARPG.Attacking
 			{
 				Destroy(gameObject);
 			}
+		}
+
+		private void OnCollisionEnter(Collision other)
+		{
+			var enemy = other.collider.GetComponent<EnemyController>();
+			if (enemy != null)
+			{
+				enemy.TakeDamage();
+			}
+
+			Destroy(gameObject);
 		}
 
 		public class Factory : PlaceholderFactory<Vector3, Vector3, float, Projectile>

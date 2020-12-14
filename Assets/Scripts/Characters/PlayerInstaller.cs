@@ -3,7 +3,7 @@ using ARPG.Moving;
 using UnityEngine;
 using Zenject;
 
-namespace ARPG.Players
+namespace ARPG.Characters
 {
 	public class PlayerInstaller : MonoInstaller
 	{

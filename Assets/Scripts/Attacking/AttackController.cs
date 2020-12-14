@@ -39,11 +39,6 @@ namespace ARPG.Attacking
 			_currentAttackSkill = _attackSkills[0];
 		}
 
-		private void Start()
-		{
-			_signalBusAdapter.Subscribe<KeyUpSignal>(OnKeyUp);
-		}
-
 		public void Attack(Vector3 position)
 		{
 			if (!_raycaster.RaycastGround(position, out _hitInfo)) return;
@@ -85,22 +80,9 @@ namespace ARPG.Attacking
 			}
 		}
 
-		private void OnKeyUp(KeyUpSignal signal)
+		public void SetAttackSkill(int skillIndex)
 		{
-			switch (signal.KeyCode)
-			{
-				case KeyCode.Alpha1:
-					_currentAttackSkill = _attackSkills[0];
-					break;
-				case KeyCode.Alpha2:
-					_currentAttackSkill = _attackSkills[1];
-					break;
-				case KeyCode.Alpha3:
-					_currentAttackSkill = _attackSkills[2];
-					break;
-				default:
-					throw new ArgumentOutOfRangeException();
-			}
+			_currentAttackSkill = _attackSkills[skillIndex];
 		}
 	}
 }

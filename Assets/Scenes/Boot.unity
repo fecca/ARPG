@@ -505,6 +505,11 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 6751741109015808352, guid: fc26e4515a409e14cb938d7ce6b35a49,
+        type: 3}
+      propertyPath: _rmbHoldSignalInterval
+      value: 0.3
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: fc26e4515a409e14cb938d7ce6b35a49, type: 3}
 --- !u!1 &1865156859

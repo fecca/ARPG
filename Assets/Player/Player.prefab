@@ -50,6 +50,9 @@ MonoBehaviour:
   _groundLayer:
     serializedVersion: 2
     m_Bits: 256
+  _projectile: {fileID: 1343596251892245329, guid: e23f159b7692b084daac6d40ed20dfe5,
+    type: 3}
+  _projectileForce: 1000
 --- !u!195 &2299958628635428254
 NavMeshAgent:
   m_ObjectHideFlags: 0

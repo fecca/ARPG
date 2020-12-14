@@ -7,9 +7,11 @@ namespace ARPG.Inputs
     public class InputHandler : MonoBehaviour
     {
         [SerializeField] private float _lmbHoldSignalInterval = 0.1f;
+        [SerializeField] private float _rmbHoldSignalInterval = 0.1f;
 
         private ISignalBusAdapter _signalBusAdapter;
-        private float _holdSignalTimer;
+        private float _lmbHoldSignalTimer;
+        private float _rmbHoldSignalTimer;
 
         [Inject]
         public void Construct(ISignalBusAdapter signalBusAdapter)
@@ -39,14 +41,29 @@ namespace ARPG.Inputs
         {
             if (!Input.GetMouseButton(button)) return;
 
-            if (_holdSignalTimer < _lmbHoldSignalInterval)
+            switch (button)
             {
-                _holdSignalTimer += Time.deltaTime;
-                return;
-            }
+                case 0:
+                    if (_lmbHoldSignalTimer >= _lmbHoldSignalInterval)
+                    {
+                        _signalBusAdapter.Fire(new MouseButtonHoldSignal(Input.mousePosition, button));
+                        _lmbHoldSignalTimer = 0f;
+                    }
 
-            _signalBusAdapter.Fire(new MouseButtonHoldSignal(Input.mousePosition, button));
-            _holdSignalTimer = 0f;
+                    _lmbHoldSignalTimer += Time.deltaTime;
+
+                    break;
+                case 1:
+                    if (_rmbHoldSignalTimer >= _rmbHoldSignalInterval)
+                    {
+                        _signalBusAdapter.Fire(new MouseButtonHoldSignal(Input.mousePosition, button));
+                        _rmbHoldSignalTimer = 0f;
+                    }
+
+                    _rmbHoldSignalTimer += Time.deltaTime;
+
+                    break;
+            }
         }
 
         private void CheckMouseButtonUp(int button)

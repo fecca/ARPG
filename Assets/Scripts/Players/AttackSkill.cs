@@ -6,8 +6,5 @@ namespace ARPG.Players
 	public class AttackSkill : ScriptableObject
 	{
 		public AttackType attackType;
-		public GameObject projectile;
-		public int numberOfProjectiles;
-		public float projectileForce;
 	}
 }

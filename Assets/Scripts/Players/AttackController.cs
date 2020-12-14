@@ -2,11 +2,10 @@
 using System.Collections.Generic;
 using ARPG.Inputs;
 using ARPG.Zenject;
-using Cinemachine.Utility;
 using CreatorKitCodeInternal;
-using UnityEditor.Experimental.GraphView;
 using UnityEngine;
 using Zenject;
+using Object = UnityEngine.Object;
 
 namespace ARPG.Players
 {
@@ -22,12 +21,15 @@ namespace ARPG.Players
 		private RaycastHit _hitInfo;
 		private AttackSkill _currentAttackSkill;
 		private ISignalBusAdapter _signalBusAdapter;
+		private Projectile.Factory _projectileFactory;
 
 		public bool IsAttacking { get; private set; }
 
 		[Inject]
-		public void Construct(ISignalBusAdapter signalBusAdapter, Raycaster raycaster)
+		public void Construct(ISignalBusAdapter signalBusAdapter, Raycaster raycaster,
+			Projectile.Factory projectileFactory)
 		{
+			_projectileFactory = projectileFactory;
 			_signalBusAdapter = signalBusAdapter;
 			_raycaster = raycaster;
 		}
@@ -57,13 +59,13 @@ namespace ARPG.Players
 			switch (_currentAttackSkill.attackType)
 			{
 				case AttackType.Single:
-					AttackSingle(_currentAttackSkill);
+					SpawnProjectiles(new[] {0});
 					break;
 				case AttackType.Spread:
-					AttackSpread(_currentAttackSkill);
+					SpawnProjectiles(new[] {-30, 0, 30});
 					break;
 				case AttackType.Area:
-					AttackArea(_currentAttackSkill);
+					SpawnProjectiles(new[] {-180, -135, -90, -45, 0, 45, 90, 135});
 					break;
 				default:
 					throw new ArgumentOutOfRangeException();
@@ -72,38 +74,20 @@ namespace ARPG.Players
 			IsAttacking = false;
 		}
 
-		private void AttackSingle(AttackSkill attackSkill)
-		{
-			SpawnProjectiles(attackSkill, new[] {0});
-		}
-
-		private void AttackSpread(AttackSkill attackSkill)
-		{
-			SpawnProjectiles(attackSkill, new[] {-30, 0, 30});
-		}
-
-		private void AttackArea(AttackSkill attackSkill)
-		{
-			SpawnProjectiles(attackSkill, new[] {-180, -135, -90, -45, 0, 45, 90, 135});
-		}
-
-		private void SpawnProjectiles(AttackSkill attackSkill, IEnumerable<int> angles)
+		private void SpawnProjectiles(IEnumerable<int> angles)
 		{
 			foreach (var angle in angles)
 			{
-				var attackPosition = _attackPosition.position;
-				var target = new Vector3(_hitInfo.point.x, attackPosition.y, _hitInfo.point.z);
-				var direction = Quaternion.AngleAxis(angle, Vector3.up) * (target - attackPosition);
+				var position = _attackPosition.position;
+				var target = new Vector3(_hitInfo.point.x, position.y, _hitInfo.point.z);
+				var direction = Quaternion.AngleAxis(angle, Vector3.up) * (target - position);
 
-				var projectile = Instantiate(attackSkill.projectile, attackPosition, Quaternion.identity);
-				projectile.GetComponent<Rigidbody>().AddForce(direction.normalized * attackSkill.projectileForce);
-				Destroy(projectile, 2.0f);
+				_projectileFactory.Create(position, direction.normalized, 2.0f);
 			}
 		}
 
 		private void OnKeyUp(KeyUpSignal signal)
 		{
-			Debug.Log($"Switching from {_currentAttackSkill.attackType}...");
 			switch (signal.KeyCode)
 			{
 				case KeyCode.Alpha0:
@@ -115,9 +99,9 @@ namespace ARPG.Players
 				case KeyCode.Alpha2:
 					_currentAttackSkill = _attackSkills[2];
 					break;
+				default:
+					throw new ArgumentOutOfRangeException();
 			}
-
-			Debug.Log($"...to {_currentAttackSkill.attackType}");
 		}
 	}
 }

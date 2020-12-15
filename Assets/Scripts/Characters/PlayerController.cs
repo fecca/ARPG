@@ -12,6 +12,7 @@ namespace ARPG.Characters
     {
         [SerializeField] private MovementController _movementController;
         [SerializeField] private AttackController _attackController;
+        [SerializeField] private CameraController _cameraController;
         [SerializeField] private CharacterStats _stats;
 
         private ISignalBusAdapter _signalBusAdapter;
@@ -31,6 +32,7 @@ namespace ARPG.Characters
 
             _movementController.SetStats(_stats);
             _attackController.SetStats(_stats);
+            _cameraController.SetFollower(transform);
         }
 
         private void OnMouseButtonDown(MouseButtonDownSignal signal)

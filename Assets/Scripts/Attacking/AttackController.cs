@@ -57,10 +57,10 @@ namespace ARPG.Attacking
                     SpawnProjectiles(new[] { 0 });
                     break;
                 case AttackType.Spread:
-                    SpawnProjectiles(new[] { -30, 0, 30 });
+                    SpawnProjectiles(new[] { -30, -15, 0, 15, 30 });
                     break;
                 case AttackType.Area:
-                    SpawnProjectiles(new[] { -180, -135, -90, -45, 0, 45, 90, 135 });
+                    SpawnProjectiles(new[] { 0, 30, 60, 90, 120, 150, 180, 210, 240, 270, 300, 330 });
                     break;
                 default:
                     throw new ArgumentOutOfRangeException();
@@ -77,11 +77,11 @@ namespace ARPG.Attacking
                 var target = new Vector3(_hitInfo.point.x, position.y, _hitInfo.point.z);
                 var direction = Quaternion.AngleAxis(angle, Vector3.up) * (target - position);
 
-                _projectileFactory.Create(position, direction.normalized, _currentAttackSkill.range);
+                _projectileFactory.Create(position, direction.normalized, _currentAttackSkill.projectileSpeed, _currentAttackSkill.range);
             }
         }
 
-        public void SetAttackSkill(int skillIndex)
+        public void ChangeAttackSkill(int skillIndex)
         {
             _currentAttackSkill = _attackSkills[skillIndex];
         }

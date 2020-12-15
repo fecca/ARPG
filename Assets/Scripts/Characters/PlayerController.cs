@@ -63,13 +63,13 @@ namespace ARPG.Characters
             switch (signal.KeyCode)
             {
                 case KeyCode.Alpha1:
-                    _attackController.SetAttackSkill(0);
+                    _attackController.ChangeAttackSkill(0);
                     break;
                 case KeyCode.Alpha2:
-                    _attackController.SetAttackSkill(1);
+                    _attackController.ChangeAttackSkill(1);
                     break;
                 case KeyCode.Alpha3:
-                    _attackController.SetAttackSkill(2);
+                    _attackController.ChangeAttackSkill(2);
                     break;
                 default:
                     throw new ArgumentOutOfRangeException();

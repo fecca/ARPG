@@ -8,85 +8,93 @@ using Zenject;
 
 namespace ARPG.Characters
 {
-	public class PlayerController : MonoBehaviour
-	{
-		[SerializeField] private MovementController _movementController;
-		[SerializeField] private AttackController _attackController;
+    public class PlayerController : MonoBehaviour
+    {
+        [SerializeField] private MovementController _movementController;
+        [SerializeField] private AttackController _attackController;
+        [SerializeField] private CharacterStats _stats;
 
-		private ISignalBusAdapter _signalBusAdapter;
+        private ISignalBusAdapter _signalBusAdapter;
 
-		[Inject]
-		public void Construct(ISignalBusAdapter signalBusAdapter)
-		{
-			_signalBusAdapter = signalBusAdapter;
-		}
+        [Inject]
+        public void Construct(ISignalBusAdapter signalBusAdapter)
+        {
+            _signalBusAdapter = signalBusAdapter;
+        }
 
-		private void Start()
-		{
-			_signalBusAdapter.Subscribe<MouseButtonDownSignal>(OnMouseButtonDown);
-			_signalBusAdapter.Subscribe<MouseButtonHoldSignal>(OnMouseButtonHold);
-			_signalBusAdapter.Subscribe<MouseButtonUpSignal>(OnMouseButtonUp);
-			_signalBusAdapter.Subscribe<KeyUpSignal>(OnKeyUp);
-		}
+        private void Start()
+        {
+            _signalBusAdapter.Subscribe<MouseButtonDownSignal>(OnMouseButtonDown);
+            _signalBusAdapter.Subscribe<MouseButtonHoldSignal>(OnMouseButtonHold);
+            _signalBusAdapter.Subscribe<MouseButtonUpSignal>(OnMouseButtonUp);
+            _signalBusAdapter.Subscribe<KeyUpSignal>(OnKeyUp);
 
-		private void OnMouseButtonDown(MouseButtonDownSignal signal)
-		{
-			switch (signal.Button)
-			{
-				case 0:
-					_movementController.Move(signal.MousePosition);
-					break;
-				case 1:
-					_movementController.StopMoving();
-					_attackController.Attack(signal.MousePosition);
-					break;
-			}
-		}
+            _movementController.SetStats(_stats);
+            _attackController.SetStats(_stats);
+        }
 
-		private void OnMouseButtonHold(MouseButtonHoldSignal signal)
-		{
-			if (_attackController.IsAttacking) return;
+        private void OnMouseButtonDown(MouseButtonDownSignal signal)
+        {
+            if (_attackController.IsAttacking) return;
 
-			switch (signal.Button)
-			{
-				case 0:
-					_movementController.Move(signal.MousePosition);
-					break;
-				case 1:
-					_movementController.StopMoving();
-					_attackController.Attack(signal.MousePosition);
-					break;
-			}
-		}
+            switch (signal.Button)
+            {
+                case 0:
+                    _movementController.Move(signal.MousePosition);
+                    break;
+                case 1:
+                    _movementController.StopMoving();
+                    _attackController.Attack(signal.MousePosition);
+                    break;
+            }
+        }
 
-		private void OnMouseButtonUp(MouseButtonUpSignal signal)
-		{
-			switch (signal.Button)
-			{
-				case 0:
-					_movementController.Move(signal.MousePosition);
-					break;
-				case 1:
-					break;
-			}
-		}
+        private void OnMouseButtonHold(MouseButtonHoldSignal signal)
+        {
+            if (_attackController.IsAttacking) return;
 
-		private void OnKeyUp(KeyUpSignal signal)
-		{
-			switch (signal.KeyCode)
-			{
-				case KeyCode.Alpha1:
-					_attackController.SetAttackSkill(0);
-					break;
-				case KeyCode.Alpha2:
-					_attackController.SetAttackSkill(1);
-					break;
-				case KeyCode.Alpha3:
-					_attackController.SetAttackSkill(2);
-					break;
-				default:
-					throw new ArgumentOutOfRangeException();
-			}
-		}
-	}
+            switch (signal.Button)
+            {
+                case 0:
+                    _movementController.Move(signal.MousePosition);
+                    break;
+                case 1:
+                    _movementController.StopMoving();
+                    _attackController.Attack(signal.MousePosition);
+                    break;
+            }
+        }
+
+        private void OnMouseButtonUp(MouseButtonUpSignal signal)
+        {
+            if (_attackController.IsAttacking) return;
+
+            switch (signal.Button)
+            {
+                case 0:
+                    _movementController.Move(signal.MousePosition);
+                    break;
+                case 1:
+                    break;
+            }
+        }
+
+        private void OnKeyUp(KeyUpSignal signal)
+        {
+            switch (signal.KeyCode)
+            {
+                case KeyCode.Alpha1:
+                    _attackController.SetAttackSkill(0);
+                    break;
+                case KeyCode.Alpha2:
+                    _attackController.SetAttackSkill(1);
+                    break;
+                case KeyCode.Alpha3:
+                    _attackController.SetAttackSkill(2);
+                    break;
+                default:
+                    throw new ArgumentOutOfRangeException();
+            }
+        }
+    }
 }

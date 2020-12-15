@@ -12,7 +12,6 @@ namespace ARPG.Characters
     {
         [SerializeField] private MovementController _movementController;
         [SerializeField] private AttackController _attackController;
-        [SerializeField] private CameraController _cameraController;
         [SerializeField] private CharacterStats _stats;
 
         private ISignalBusAdapter _signalBusAdapter;
@@ -25,30 +24,9 @@ namespace ARPG.Characters
 
         private void Start()
         {
-            _signalBusAdapter.Subscribe<MouseButtonDownSignal>(OnMouseButtonDown);
             _signalBusAdapter.Subscribe<MouseButtonHoldSignal>(OnMouseButtonHold);
             _signalBusAdapter.Subscribe<MouseButtonUpSignal>(OnMouseButtonUp);
             _signalBusAdapter.Subscribe<KeyUpSignal>(OnKeyUp);
-
-            _movementController.SetStats(_stats);
-            _attackController.SetStats(_stats);
-            _cameraController.SetFollower(transform);
-        }
-
-        private void OnMouseButtonDown(MouseButtonDownSignal signal)
-        {
-            if (_attackController.IsAttacking) return;
-
-            switch (signal.Button)
-            {
-                case 0:
-                    _movementController.Move(signal.MousePosition);
-                    break;
-                case 1:
-                    _movementController.StopMoving();
-                    _attackController.Attack(signal.MousePosition);
-                    break;
-            }
         }
 
         private void OnMouseButtonHold(MouseButtonHoldSignal signal)
@@ -58,11 +36,10 @@ namespace ARPG.Characters
             switch (signal.Button)
             {
                 case 0:
-                    _movementController.Move(signal.MousePosition);
+                    Move(signal.MousePosition);
                     break;
                 case 1:
-                    _movementController.StopMoving();
-                    _attackController.Attack(signal.MousePosition);
+                    Attack(signal.MousePosition);
                     break;
             }
         }
@@ -74,7 +51,7 @@ namespace ARPG.Characters
             switch (signal.Button)
             {
                 case 0:
-                    _movementController.Move(signal.MousePosition);
+                    Move(signal.MousePosition);
                     break;
                 case 1:
                     break;
@@ -97,6 +74,17 @@ namespace ARPG.Characters
                 default:
                     throw new ArgumentOutOfRangeException();
             }
+        }
+
+        private void Move(Vector3 mousePosition)
+        {
+            _movementController.Move(mousePosition, _stats.movementSpeed);
+        }
+
+        private void Attack(Vector3 mousePosition)
+        {
+            _movementController.StopMoving();
+            _attackController.Attack(mousePosition, _stats.attackSpeed);
         }
     }
 }

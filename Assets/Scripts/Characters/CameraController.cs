@@ -5,25 +5,22 @@ namespace ARPG.Characters
 {
     public class CameraController : MonoBehaviour
     {
+        [SerializeField] private float zoomDistance = 10.0f;
+        [SerializeField] private Transform follower;
+
         private Camera _camera;
-        private Transform _follower;
 
         [Inject]
-        public void Construct(Camera camera)
+        public void Construct(Camera cam)
         {
-            _camera = camera;
+            _camera = cam;
         }
 
         private void Update()
         {
-            var followerPosition = _follower.position;
+            var followerPosition = follower.position;
             var cameraTransform = _camera.transform;
-            cameraTransform.position = new Vector3(followerPosition.x, cameraTransform.position.y, followerPosition.z - 10f);
-        }
-
-        public void SetFollower(Transform follower)
-        {
-            _follower = follower;
+            cameraTransform.position = new Vector3(followerPosition.x, cameraTransform.position.y, followerPosition.z - zoomDistance);
         }
     }
 }

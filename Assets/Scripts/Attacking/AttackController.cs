@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using ARPG.Characters;
 using ARPG.Moving;
 using ARPG.Zenject;
 using CreatorKitCodeInternal;
@@ -22,7 +21,6 @@ namespace ARPG.Attacking
         private RaycastHit _hitInfo;
         private AttackSkill _currentAttackSkill;
         private Projectile.Factory _projectileFactory;
-        private CharacterStats _stats;
 
         public bool IsAttacking { get; private set; }
 
@@ -41,19 +39,14 @@ namespace ARPG.Attacking
             _currentAttackSkill = _attackSkills[0];
         }
 
-        public void SetStats(CharacterStats stats)
-        {
-            _stats = stats;
-        }
-
-        public void Attack(Vector3 mousePosition)
+        public void Attack(Vector3 mousePosition, float attackSpeed)
         {
             if (!_raycaster.RaycastGround(mousePosition, out _hitInfo)) return;
 
             IsAttacking = true;
             _rootTransform.LookAt(_hitInfo.point);
             _animator.SetTrigger(_attackParameterId);
-            _animator.SetFloat(_attackSpeedParameterId, _stats.attackSpeed);
+            _animator.SetFloat(_attackSpeedParameterId, attackSpeed);
         }
 
         public void AttackFrame()

@@ -12,4 +12,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1015d5a3f0564bddbedc2b025c9e7b6a, type: 3}
   m_Name: BossLoot
   m_EditorClassIdentifier: 
-  itemConfigs: []
+  itemConfigs:
+  - itemConfig: {fileID: 11400000, guid: 4ecdd083f532f9a41ba9cf7abc381d96, type: 2}
+    chance: 84
+  - itemConfig: {fileID: 11400000, guid: 1cb703ad49033b84e8032efea94e1968, type: 2}
+    chance: 45
+  - itemConfig: {fileID: 11400000, guid: f39bf37a41f06ad419fdbf785c587d1a, type: 2}
+    chance: 8

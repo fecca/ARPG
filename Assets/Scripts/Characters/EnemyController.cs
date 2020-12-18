@@ -28,6 +28,11 @@ namespace ARPG.Characters
 
 		public void TakeDamage()
 		{
+			Kill();
+		}
+
+		public void Kill()
+		{
 			_navMeshAgent.enabled = false;
 			_animator.SetTrigger(_faintParameterId);
 			_signalBusAdapter.Fire(new EnemyDeathSignal(transform.position, lootTableConfig));

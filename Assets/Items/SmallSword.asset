@@ -13,6 +13,7 @@ MonoBehaviour:
   m_Name: SmallSword
   m_EditorClassIdentifier: 
   name: Small Sword
+  prefab: {fileID: 3077166278063410149, guid: d46a1b2be6bc4cc41b80186fc85891ca, type: 3}
   stats:
   - type: 0
     value: 20

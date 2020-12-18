@@ -13,6 +13,7 @@ MonoBehaviour:
   m_Name: BigSword
   m_EditorClassIdentifier: 
   name: Big Sword
+  prefab: {fileID: 1998864349549106402, guid: 6df098dc4b841744b93d937d0348aa7c, type: 3}
   stats:
   - type: 0
     value: 50

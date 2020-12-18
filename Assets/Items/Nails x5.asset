@@ -13,4 +13,5 @@ MonoBehaviour:
   m_Name: Nails x5
   m_EditorClassIdentifier: 
   name: Nails x5
+  prefab: {fileID: 5374213013743536356, guid: 81f4efbe41c05574a8e615268bac1f73, type: 3}
   stats: []

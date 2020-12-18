@@ -12,12 +12,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1015d5a3f0564bddbedc2b025c9e7b6a, type: 3}
   m_Name: SmallLoot
   m_EditorClassIdentifier: 
-  items:
-  - item: {fileID: 11400000, guid: 77c4a8c4370430b409837a61fa5a5ede, type: 2}
-    chance: 85
-  - item: {fileID: 11400000, guid: 1cb703ad49033b84e8032efea94e1968, type: 2}
-    chance: 11
-  - item: {fileID: 11400000, guid: b2e8afd8b8b1a254db1e9295e17bc3d0, type: 2}
-    chance: 65
-  - item: {fileID: 11400000, guid: 4ecdd083f532f9a41ba9cf7abc381d96, type: 2}
-    chance: 36
+  itemConfigs:
+  - itemConfig: {fileID: 11400000, guid: 77c4a8c4370430b409837a61fa5a5ede, type: 2}
+    chance: 88
+  - itemConfig: {fileID: 11400000, guid: b2e8afd8b8b1a254db1e9295e17bc3d0, type: 2}
+    chance: 50
+  - itemConfig: {fileID: 11400000, guid: 4ecdd083f532f9a41ba9cf7abc381d96, type: 2}
+    chance: 24
+  - itemConfig: {fileID: 11400000, guid: 1cb703ad49033b84e8032efea94e1968, type: 2}
+    chance: 7

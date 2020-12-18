@@ -1,5 +1,4 @@
 ﻿using ARPG.Attacking;
-using ARPG.Items;
 using ARPG.Moving;
 using UnityEngine;
 using Zenject;
@@ -19,7 +18,6 @@ namespace ARPG.Characters
 				.FromComponentInNewPrefab(ProjectilePrefab);
 
 			Container.DeclareSignal<EnemyDeathSignal>();
-			Container.BindInterfacesAndSelfTo<LootFountain>().AsSingle();
 		}
 	}
 }

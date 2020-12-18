@@ -1,6 +1,7 @@
 ﻿using ARPG.Items;
 using ARPG.Zenject;
 using UnityEngine;
+using UnityEngine.AI;
 using Zenject;
 
 namespace ARPG.Characters
@@ -8,8 +9,8 @@ namespace ARPG.Characters
 	public class EnemyController : MonoBehaviour
 	{
 		[SerializeField] private Animator _animator;
-		[SerializeField] private SphereCollider _collider;
-		[SerializeField] private LootTable _lootTable;
+		[SerializeField] private NavMeshAgent _navMeshAgent;
+		[SerializeField] private LootTableConfig lootTableConfig;
 
 		private int _faintParameterId;
 		private ISignalBusAdapter _signalBusAdapter;
@@ -27,9 +28,9 @@ namespace ARPG.Characters
 
 		public void TakeDamage()
 		{
-			_collider.enabled = false;
+			_navMeshAgent.enabled = false;
 			_animator.SetTrigger(_faintParameterId);
-			_signalBusAdapter.Fire(new EnemyDeathSignal(transform.position, _lootTable));
+			_signalBusAdapter.Fire(new EnemyDeathSignal(transform.position, lootTableConfig));
 		}
 	}
 }

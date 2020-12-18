@@ -4,8 +4,8 @@ using UnityEngine;
 namespace ARPG.Items
 {
 	[CreateAssetMenu(menuName = "LootTable")]
-	public class LootTable : ScriptableObject
+	public class LootTableConfig : ScriptableObject
 	{
-		public List<LootTableItem> items;
+		public List<LootTableItemConfig> itemConfigs;
 	}
 }

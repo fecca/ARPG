@@ -6,11 +6,11 @@ namespace ARPG.Characters
 	public class EnemyDeathSignal
 	{
 		public readonly Vector3 Position;
-		public readonly LootTable LootTable;
+		public readonly LootTableConfig LootTableConfig;
 
-		public EnemyDeathSignal(Vector3 position, LootTable lootTable)
+		public EnemyDeathSignal(Vector3 position, LootTableConfig lootTableConfig)
 		{
-			LootTable = lootTable;
+			LootTableConfig = lootTableConfig;
 			Position = position;
 		}
 	}

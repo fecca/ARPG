@@ -12,8 +12,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1015d5a3f0564bddbedc2b025c9e7b6a, type: 3}
   m_Name: BossLoot
   m_EditorClassIdentifier: 
-  items:
-  - item: {fileID: 11400000, guid: 77c4a8c4370430b409837a61fa5a5ede, type: 2}
-    weight: 24
-  - item: {fileID: 11400000, guid: f39bf37a41f06ad419fdbf785c587d1a, type: 2}
-    weight: 1
+  itemConfigs: []

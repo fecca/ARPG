@@ -1,12 +1,13 @@
 ﻿using System;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 namespace ARPG.Items
 {
 	[Serializable]
-	public class LootTableItem
+	public class LootTableItemConfig
 	{
-		public Item item;
+		public ItemConfig itemConfig;
 		[Range(1, 100)] public int chance;
 	}
 }

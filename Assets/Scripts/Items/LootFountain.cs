@@ -45,11 +45,15 @@ namespace ARPG.Items
 		{
 			foreach (var itemConfig in loot)
 			{
-				var randomInCircle =
-					position + new Vector3(Random.insideUnitCircle.x, position.y, Random.insideUnitCircle.y);
-				if (_navmeshSampler.SampleGroundPosition(randomInCircle, out var hit))
+				var insideUnitSphere = Random.insideUnitSphere;
+				var randomPosition = position + new Vector3(insideUnitSphere.x, insideUnitSphere.y, insideUnitSphere.z);
+				if (_navmeshSampler.SampleGroundPosition(randomPosition, out var hit))
 				{
 					_lootItemOnGroundFactory.Create(itemConfig, hit.position);
+					// var go = GameObject.CreatePrimitive(PrimitiveType.Cube);
+					// go.transform.localScale = Vector3.one * 0.1f;
+					// go.transform.position = hit.position;
+					// go.name = "go";
 				}
 			}
 		}

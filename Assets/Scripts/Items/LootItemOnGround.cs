@@ -1,4 +1,5 @@
-﻿using TMPro;
+﻿using System;
+using TMPro;
 using UnityEngine;
 using Zenject;
 
@@ -6,7 +7,7 @@ namespace ARPG.Items
 {
 	public class LootItemOnGround : MonoBehaviour
 	{
-		[SerializeField] private TMP_Text _text;
+		[SerializeField] private Transform parent;
 
 		private ItemConfig _itemConfig;
 		private Vector3 _position;
@@ -21,8 +22,7 @@ namespace ARPG.Items
 		private void Start()
 		{
 			transform.position = _position;
-			_text.text = _itemConfig.name;
-			Instantiate(_itemConfig.prefab, transform);
+			Instantiate(_itemConfig.prefab, parent);
 		}
 
 		public class Factory : PlaceholderFactory<ItemConfig, Vector3, LootItemOnGround>

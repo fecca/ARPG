@@ -1,4 +1,5 @@
 ﻿using System;
+using UnityEngine;
 using Zenject;
 
 namespace ARPG.Zenject
@@ -19,6 +20,7 @@ namespace ARPG.Zenject
 
 		public void Fire<TSignal>(TSignal signal)
 		{
+			Debug.Log($"Firing signal of type {typeof(TSignal)}");
 			_signalBus.Fire(signal);
 		}
 	}

@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using Zenject;
 
-public class Billboarding : MonoBehaviour
+public class Billboarder : MonoBehaviour
 {
 	private Camera _cam;
 

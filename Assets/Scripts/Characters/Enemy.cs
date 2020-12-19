@@ -33,7 +33,7 @@ namespace ARPG.Characters
 
 		private void Start()
 		{
-			hitTrigger.Initialize(1.0f, OnHitTrigger);
+			hitTrigger.Initialize(2.0f, OnHitTrigger);
 			aggroTrigger.Initialize(10.0f, OnAggroTrigger);
 		}
 
@@ -52,9 +52,13 @@ namespace ARPG.Characters
 
 		public void Kill()
 		{
+			hitTrigger.enabled = false;
+			aggroTrigger.enabled = false;
 			_movementController.DisableAgent();
 			_animator.SetTrigger(_faintParameterId);
 			_signalBusAdapter.Fire(new EnemyDeathSignal(transform.position, lootTableConfig));
+
+			Destroy(gameObject, 2.0f);
 		}
 
 		private void OnAggroTrigger(Collider other)

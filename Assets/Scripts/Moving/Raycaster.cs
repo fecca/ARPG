@@ -14,7 +14,12 @@ namespace ARPG.Moving
 
 		public bool RaycastGround(Vector3 position, out RaycastHit raycastHit)
 		{
-			return Physics.Raycast(_camera.ScreenPointToRay(position), out raycastHit, 1000.0f, _groundLayer);
+			var ray = _camera.ScreenPointToRay(position);
+			var raycast = Physics.Raycast(ray, out raycastHit, 1000.0f, _groundLayer);
+
+			Debug.DrawRay(ray.origin, raycastHit.point, Color.magenta, 100f);
+
+			return raycast;
 		}
 	}
 }

@@ -1,4 +1,5 @@
-﻿using ARPG.Characters;
+﻿using System;
+using ARPG.Characters;
 using UnityEngine;
 using Zenject;
 
@@ -37,12 +38,6 @@ namespace ARPG.Attacking
 
 		private void OnTriggerEnter(Collider other)
 		{
-			var enemy = other.GetComponent<EnemyController>();
-			if (enemy != null)
-			{
-				enemy.TakeDamage();
-			}
-
 			Destroy(gameObject);
 		}
 

@@ -78,7 +78,7 @@ namespace ARPG.Characters
 
         private void Move(Vector3 mousePosition)
         {
-            _movementController.Move(mousePosition, _stats.movementSpeed);
+            _movementController.MoveToMousePosition(mousePosition, _stats.movementSpeed);
         }
 
         private void Attack(Vector3 mousePosition)

@@ -2,7 +2,7 @@
 using ARPG.Characters;
 using UnityEngine;
 
-namespace ARPG.Debug
+namespace ARPG.Debugging
 {
 	public class DebugInputHandler : MonoBehaviour
 	{
@@ -10,7 +10,7 @@ namespace ARPG.Debug
 		{
 			if (Input.GetKeyDown(KeyCode.K))
 			{
-				FindObjectsOfType<EnemyController>().ToList().ForEach(ec => ec.Kill());
+				FindObjectsOfType<Enemy>().ToList().ForEach(ec => ec.Kill());
 			}
 		}
 	}

@@ -22,8 +22,8 @@ TagManager:
   - PlayerEquipment
   - SelfIgnore
   - PlayerProjectile
-  - 
-  - 
+  - EnemyAggro
+  - Enemy
   - 
   - 
   - 

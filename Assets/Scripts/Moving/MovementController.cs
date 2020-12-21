@@ -67,6 +67,7 @@ namespace ARPG.Moving
 		public void DisableAgent()
 		{
 			_navMeshAgent.enabled = false;
+			_target = null;
 		}
 
 		public void FollowTarget(Transform target)

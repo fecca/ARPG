@@ -3,7 +3,6 @@ using UnityEngine;
 
 [RequireComponent(typeof(SphereCollider))]
 [RequireComponent(typeof(Rigidbody))]
-// [ExecuteInEditMode]
 public class SphereTrigger : MonoBehaviour
 {
 	private Action<Collider> _onTrigger = _ => { };
@@ -14,6 +13,16 @@ public class SphereTrigger : MonoBehaviour
 	{
 		_sphereCollider = GetComponent<SphereCollider>();
 		_rigidbody = GetComponent<Rigidbody>();
+	}
+
+	private void OnEnable()
+	{
+		_sphereCollider.enabled = true;
+	}
+
+	private void OnDisable()
+	{
+		_sphereCollider.enabled = false;
 	}
 
 	private void OnTriggerEnter(Collider other)

@@ -1,27 +1,22 @@
 ﻿using UnityEngine;
-using Zenject;
 
 namespace ARPG.Characters
 {
+	[ExecuteInEditMode]
 	public class CameraController : MonoBehaviour
 	{
-		[SerializeField] private float zoomDistance = 10.0f;
-		[SerializeField] private Transform follower;
+		[SerializeField] private Camera playerCamera;
+		[SerializeField] private CameraConfig cameraConfig;
 
-		private Camera _playerCamera;
-
-		[Inject]
-		public void Construct(Camera cam)
+		private void Awake()
 		{
-			_playerCamera = cam;
+			playerCamera.transform.localRotation = Quaternion.Euler(cameraConfig.localRotation);
 		}
 
 		private void Update()
 		{
-			var followerPosition = follower.position;
-			var cameraTransform = _playerCamera.transform;
-			cameraTransform.position = new Vector3(followerPosition.x, cameraTransform.position.y,
-				followerPosition.z - zoomDistance);
+			playerCamera.transform.position = transform.position + cameraConfig.localPosition;
+			playerCamera.transform.rotation = Quaternion.Euler(cameraConfig.localRotation);
 		}
 	}
 }
